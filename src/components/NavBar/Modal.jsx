@@ -32,7 +32,7 @@ const Modal = () => {
             </div>
             <div className="grid grid-cols-2 mt-5">
               <div className="w-1/2 ">
-                <h4 className="inline-block text-lg ">gender : </h4>
+                <h4 className="inline-block text-lg ">Gender : </h4>
               </div>
               <div className="flex">
                 <label className="mx-2">Male</label>
