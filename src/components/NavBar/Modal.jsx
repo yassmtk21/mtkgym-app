@@ -17,7 +17,7 @@ const Modal = () => {
         />
         <div className="w-full lg:w-1/2 py-16 px-12">
           <h2 className="text-3xl mb-4 text-black font-bold">Register</h2>
-          <form action="">
+          <form>
             <div className="grid grid-cols-2 gap-5">
               <input
                 type="text"
@@ -83,7 +83,7 @@ const Modal = () => {
             </div>
             <div className="mt-10 grid grid-cols-2 gap-5">
               <button
-                type="submit"
+                type="button"
                 className="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800"
               >
                 Register
