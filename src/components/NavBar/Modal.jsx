@@ -17,7 +17,7 @@ const Modal = () => {
         />
         <div className="w-full lg:w-1/2 py-16 px-12">
           <h2 className="text-3xl mb-4 text-black font-bold">Register</h2>
-          <form action="#">
+          <form action="home">
             <div className="grid grid-cols-2 gap-5">
               <input
                 type="text"
