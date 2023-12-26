@@ -1,4 +1,4 @@
-import React, { useContext, useReducer } from "react";
+import React, { useContext, useEffect, useReducer } from "react";
 import background from "../../assets/background.jpg";
 import { ActionContext } from "../context/ActionContext";
 import { setIsModal } from "../actions/Actions";
@@ -15,10 +15,7 @@ const Modal = () => {
     dispatchForm({ type: "input", field: name, payload: value });
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    dispatchForm({ type: "validate" });
-    console.log(stateForm.hasErrors)
+  useEffect(() => {
     if (stateForm.hasErrors) {
       dispatchForm({ type: "SET_LOADING", payload: true });
       setTimeout(() => {
@@ -26,6 +23,10 @@ const Modal = () => {
         console.log(stateForm);
       }, 2000);
     }
+  }, [stateForm.hasErrors]);
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    dispatchForm({ type: "validate" });
   };
 
   const handleExit = () => {
