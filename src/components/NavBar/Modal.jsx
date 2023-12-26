@@ -23,7 +23,7 @@ const Modal = () => {
         console.log(stateForm);
       }, 2000);
     }
-  },[stateForm.hasErrors]);
+  }, [stateForm.hasErrors]);
   const handleSubmit = (event) => {
     event.preventDefault();
     dispatchForm({ type: "validate" });
