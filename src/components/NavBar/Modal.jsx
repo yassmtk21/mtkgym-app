@@ -17,18 +17,17 @@ const Modal = () => {
     if (stateForm.hasErrors) {
       console.log("Validation errors exist");
     } else {
-      dispatchForm({type: "SET_LOADING", payload:true});
+      dispatchForm({ type: "SET_LOADING", payload: true });
       setTimeout(() => {
         console.log("No validation errors, can submit data");
         console.log("stateForm:", stateForm);
-        dispatchForm({type: "SET_LOADING", payload: false});
+        dispatchForm({ type: "SET_LOADING", payload: false });
       }, 2000);
     }
-  },[stateForm.hasErrors]);
+  }, [stateForm.hasErrors]);
   const handleSubmit = (event) => {
     event.preventDefault();
     dispatchForm({ type: "validate" });
-    
   };
   const handleExit = () => {
     dispatchForm({ type: "reset" });
