@@ -8,6 +8,7 @@ export const initstate = {
   cin: "",
   errors: {},
   loading: false,
+  hasErrors: false,
 };
 
 export const ActionReducerForm = (stateForm, action) => {
@@ -34,11 +35,8 @@ export const ActionReducerForm = (stateForm, action) => {
           errors[fieldName] = rule;
         }
       });
-      return { ...stateForm, errors };
-
-    case "submit":
-      return stateForm;
-
+      const hasErrors = Object.keys(errors).length === 0;
+      return { ...stateForm, errors, hasErrors };
     case "reset":
       return initstate;
     default:

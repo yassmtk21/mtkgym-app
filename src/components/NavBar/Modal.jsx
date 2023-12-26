@@ -18,16 +18,12 @@ const Modal = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     dispatchForm({ type: "validate" });
-
-    const hasErrors = Object.keys(stateForm.errors).length === 0;
-
-    if (hasErrors) {
-      dispatchForm({ type: "SET_LOADING", payload: true }); // Dispatch through the global context
-      dispatchForm({ type: "submit" });
-
+    console.log(stateForm.hasErrors)
+    if (stateForm.hasErrors) {
+      dispatchForm({ type: "SET_LOADING", payload: true });
       setTimeout(() => {
-        dispatchForm({ type: "SET_LOADING", payload: false }); // Dispatch through the global context
-        console.log(stateForm); // Log the global state
+        dispatchForm({ type: "SET_LOADING", payload: false });
+        console.log(stateForm);
       }, 2000);
     }
   };
@@ -52,7 +48,7 @@ const Modal = () => {
         />
         <div className="w-full lg:w-1/2 py-16 px-12">
           <h2 className="text-3xl mb-4 text-black font-bold">Register</h2>
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="grid md:grid-cols-2 gap-5">
               <div>
                 <input
@@ -165,7 +161,6 @@ const Modal = () => {
             </div>
             <div className="mt-10 grid grid-cols-2 gap-5">
               <input
-                onClick={handleSubmit}
                 type="submit"
                 value={"register"}
                 className="w-fulltext-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm sm:px-5 px-2 py-2.5 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800"
