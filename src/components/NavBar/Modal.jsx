@@ -1,4 +1,4 @@
-import { useContext, useReducer, useEffect } from "react";
+import React, { useContext, useReducer } from "react";
 import background from "../../assets/background.jpg";
 import { ActionContext } from "../context/ActionContext";
 import { setIsModal } from "../actions/Actions";
@@ -7,28 +7,31 @@ import { initstate, ActionReducerForm } from "./ActionReducerForm";
 const Modal = () => {
   const [stateForm, dispatchForm] = useReducer(ActionReducerForm, initstate);
   const { state, dispatch } = useContext(ActionContext);
+
   const openModal = state.isModal;
 
   const handleChange = (event) => {
     const { name, value } = event.target;
     dispatchForm({ type: "input", field: name, payload: value });
   };
-  useEffect(() => {
-    if (stateForm.hasErrors) {
-      console.log("Validation errors exist");
-    } else {
-      dispatchForm({ type: "SET_LOADING", payload: true });
-      setTimeout(() => {
-        console.log("No validation errors, can submit data");
-        console.log("stateForm:", stateForm);
-        dispatchForm({ type: "SET_LOADING", payload: false });
-      }, 2000);
-    }
-  }, [stateForm.hasErrors]);
+
   const handleSubmit = (event) => {
     event.preventDefault();
     dispatchForm({ type: "validate" });
+
+    const hasErrors = Object.keys(stateForm.errors).length === 0;
+
+    if (hasErrors) {
+      dispatchForm({ type: "SET_LOADING", payload: true }); // Dispatch through the global context
+      dispatchForm({ type: "submit" });
+
+      setTimeout(() => {
+        dispatchForm({ type: "SET_LOADING", payload: false }); // Dispatch through the global context
+        console.log(stateForm); // Log the global state
+      }, 2000);
+    }
   };
+
   const handleExit = () => {
     dispatchForm({ type: "reset" });
     dispatch(setIsModal(false));
@@ -74,6 +77,9 @@ const Modal = () => {
                   placeholder="last name"
                   className="border border-gray-400 py-1 px-2 w-full"
                 />
+                {stateForm.errors && stateForm.errors.last_name && (
+                  <p className="text-red-500">{stateForm.errors.last_name}</p>
+                )}
               </div>
             </div>
             <div className="grid md:grid-cols-2 mt-5">
@@ -97,6 +103,9 @@ const Modal = () => {
                   value={"female"}
                   className="cursor-pointer"
                 />
+                {stateForm.errors && stateForm.errors.gender && (
+                  <p className="text-red-500">{stateForm.errors.gender}</p>
+                )}
               </div>
             </div>
             <div className="mt-5">
@@ -108,6 +117,9 @@ const Modal = () => {
                 placeholder="email"
                 className="border border-gray-400 py-1 px-2 w-full"
               />
+              {stateForm.errors && stateForm.errors.email && (
+                <p className="text-red-500">{stateForm.errors.email}</p>
+              )}
             </div>
             <div className="mt-5">
               <input
@@ -118,6 +130,9 @@ const Modal = () => {
                 placeholder="phone"
                 className="border border-gray-400 py-1 px-2 w-full"
               />
+              {stateForm.errors && stateForm.errors.phone && (
+                <p className="text-red-500">{stateForm.errors.phone}</p>
+              )}
             </div>
             <div className=" mt-5 w-full">
               <div className="w-full flex">
@@ -130,7 +145,9 @@ const Modal = () => {
                   className="border border-gray-400 py-1 px-2 w-full"
                 />
               </div>
-
+              {stateForm.errors && stateForm.errors.age && (
+                <p className="text-red-500">{stateForm.errors.age}</p>
+              )}
               <div className="sm:full mt-5">
                 <input
                   onChange={handleChange}
@@ -140,6 +157,9 @@ const Modal = () => {
                   placeholder="cin"
                   className="border border-gray-400 py-1 px-2 w-full"
                 />
+                {stateForm.errors && stateForm.errors.cin && (
+                  <p className="text-red-500">{stateForm.errors.cin}</p>
+                )}
                 <br />
               </div>
             </div>

@@ -7,7 +7,7 @@ export const initstate = {
   age: "",
   cin: "",
   errors: {},
-  loading: false
+  loading: false,
 };
 
 export const ActionReducerForm = (stateForm, action) => {
@@ -28,16 +28,16 @@ export const ActionReducerForm = (stateForm, action) => {
         age: "age required",
         cin: "cin required",
       };
-      
-      Object.entries(validationRules).forEach(([fieldName, rule])=>{
-        if(!stateForm[fieldName]){
+
+      Object.entries(validationRules).forEach(([fieldName, rule]) => {
+        if (!stateForm[fieldName]) {
           errors[fieldName] = rule;
         }
-      })
-      const hasErrors = Object.keys(errors).length > 0;
+      });
+      return { ...stateForm, errors };
 
-      return { ...stateForm, errors, hasErrors };
-
+    case "submit":
+      return stateForm;
 
     case "reset":
       return initstate;
