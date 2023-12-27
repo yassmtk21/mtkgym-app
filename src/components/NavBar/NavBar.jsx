@@ -40,8 +40,8 @@ const NavBar = () => {
         </div>
         <IconsList
           iconName={"menu"}
-          className={`lg:hidden absolute right-[110px] z-[999999999] ${
-            MenuIsOpen && "text-red-500"
+          className={`lg:hidden absolute right-[110px]  ${
+            MenuIsOpen && "text-red-500 z-[999999999]"
           }`}
         />
         <div

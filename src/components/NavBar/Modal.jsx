@@ -7,7 +7,6 @@ import { initstate, ActionReducerForm } from "./ActionReducerForm";
 const Modal = () => {
   const [stateForm, dispatchForm] = useReducer(ActionReducerForm, initstate);
   const { state, dispatch } = useContext(ActionContext);
-
   const openModal = state.isModal;
 
   const handleChange = (event) => {
@@ -15,15 +14,21 @@ const Modal = () => {
     dispatchForm({ type: "input", field: name, payload: value });
   };
 
+  // const setData = useMemo(()=>{
+  //   return stateForm;
+  // },[stateForm])
+
   useEffect(() => {
-    if (stateForm.hasErrors) {
+     if(stateForm.hasErrors){
       dispatchForm({ type: "SET_LOADING", payload: true });
       setTimeout(() => {
         dispatchForm({ type: "SET_LOADING", payload: false });
         console.log(stateForm);
       }, 2000);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [stateForm.hasErrors]);
+
   const handleSubmit = (event) => {
     event.preventDefault();
     dispatchForm({ type: "validate" });
@@ -42,7 +47,7 @@ const Modal = () => {
           register succesfuly
         </p>
       )}
-      <div className="flex flex-col lg:flex-row w-[90%] sm:w-[70%] text-black mx-auto shadow-lg overflow-hidden fixed left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white z-50 rounded-lg">
+      <div className="flex flex-col lg:flex-row w-[90%] sm:w-[70%] text-black mx-auto shadow-lg overflow-hidden fixed left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white z-[9999999] rounded-lg">
         <div
           className="w-full lg:w-1/2 flex flex-col items-center justify-center p-12 bg-no-repeat bg-cover bg-center"
           style={{ backgroundImage: `url(${background})` }}
