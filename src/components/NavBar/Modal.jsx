@@ -14,12 +14,8 @@ const Modal = () => {
     dispatchForm({ type: "input", field: name, payload: value });
   };
 
-  // const setData = useMemo(()=>{
-  //   return stateForm;
-  // },[stateForm])
-
   useEffect(() => {
-     if(stateForm.hasErrors){
+    if (stateForm.hasErrors) {
       dispatchForm({ type: "SET_LOADING", payload: true });
       setTimeout(() => {
         dispatchForm({ type: "SET_LOADING", payload: false });
@@ -44,7 +40,7 @@ const Modal = () => {
       <div className="fixed top-0 left-0 right-0 bottom-0 bg-[#000000] opacity-50 z-50 "></div>
       {stateForm.loading && (
         <p className="fixed top-4 left-[50%] translate-x-[-50%] bg-green-600 text-white font-bold z-[99999999] px-4 py-2">
-          register succesfuly
+          Register successfully
         </p>
       )}
       <div className="flex flex-col lg:flex-row w-[90%] sm:w-[70%] text-black mx-auto shadow-lg overflow-hidden fixed left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white z-[9999999] rounded-lg">
